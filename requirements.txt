@@ -1,0 +1,10 @@
+# Required technologies used for running this app (pinned for reproducibility).
+# Tested in this project with Python 3.13.5 and the pinned versions below.
+
+selenium==4.38.0
+pandas==2.3.3
+webdriver-manager==4.0.2
+flask==3.1.2
+
+# Optional extras you may want during development (not required at runtime):
+# pytest, black, isort, python-dotenv
