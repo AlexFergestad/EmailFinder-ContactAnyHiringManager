@@ -1,16 +1,17 @@
 {
   "manifest_version": 3,
-  "name": "Recruiter Contact Finder",
+  "name": "Recruiter Finder (LinkedIn)",
   "version": "1.0",
-  "description": "Find public recruiter or career contact links for any company website.",
+  "description": "Extracts publicly visible info from LinkedIn profiles.",
   "permissions": ["activeTab", "scripting"],
   "action": {
-    "default_popup": "popup.html",
-    "default_icon": {
-      "16": "icon16.png",
-      "48": "icon48.png",
-      "128": "icon128.png"
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://www.linkedin.com/in/*"],
+      "js": ["content.js"]
     }
-  }
+  ]
 }
 

@@ -1,40 +1,32 @@
-document.getElementById("scrapeBtn").addEventListener("click", async () => {
-  const company = document.getElementById("company").value;
-  const url = document.getElementById("url").value;
+document.getElementById("scrapeBtn").addEventListener("click", () => {
   const resultsDiv = document.getElementById("results");
+  resultsDiv.innerHTML = "<p>Fetching profile info...</p>";
 
-  if (!company || !url) {
-    resultsDiv.innerHTML = "<p style='color:red'>Please enter both fields.</p>";
-    return;
-  }
+  // Get the active tab
+  chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+    chrome.tabs.sendMessage(tabs[0].id, { action: "getProfileInfo" }, (data) => {
+      if (!data) {
+        resultsDiv.innerHTML = "<p style='color:red'>Could not read profile info.</p>";
+        return;
+      }
 
-  resultsDiv.innerHTML = "<p>Scraping... please wait.</p>";
+      // Display profile name and job title
+      resultsDiv.innerHTML = `<h3>${data.name}</h3><p>${data.title}</p>`;
 
-  try {
-    const response = await fetch(`http://127.0.0.1:5000/scrape?company=${company}&url=${url}`);
-    const data = await response.json();
-
-    if (data.error) {
-      resultsDiv.innerHTML = `<p style='color:red'>${data.error}</p>`;
-      return;
-    }
-
-    if (data.length === 0) {
-      resultsDiv.innerHTML = "<p>No recruiter links found.</p>";
-      return;
-    }
-
-    // Display results
-    resultsDiv.innerHTML = "<h3>Results:</h3>";
-    data.forEach(item => {
-      const link = document.createElement("a");
-      link.href = item.contact_link;
-      link.target = "_blank";
-      link.textContent = `${item.contact_text || "Recruiting Contact"}`;
-      resultsDiv.appendChild(link);
-      resultsDiv.appendChild(document.createElement("br"));
+      // Display public links
+      if (data.publicLinks.length > 0) {
+        resultsDiv.innerHTML += "<h4>Public Links:</h4>";
+        data.publicLinks.forEach(link => {
+          const a = document.createElement("a");
+          a.href = link;
+          a.textContent = link;
+          a.target = "_blank";
+          resultsDiv.appendChild(a);
+          resultsDiv.appendChild(document.createElement("br"));
+        });
+      } else {
+        resultsDiv.innerHTML += "<p>No public links found.</p>";
+      }
     });
-  } catch (error) {
-    resultsDiv.innerHTML = `<p style='color:red'>Error connecting to backend.</p>`;
-  }
+  });
 });
