@@ -1,17 +1,36 @@
-<!-- This is the popup.html file — the small UI that appears when 
- someone clicks your Chrome extension icon. -->
-
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Recruiter Finder</title>
+  <title>LinkedIn Recruiter Finder</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <h2>LinkedIn Recruiter Finder</h2>
+
+  <!-- LinkedIn Profile Extraction -->
   <button id="scrapeBtn">Get Profile Info</button>
+  <button id="generateEmailsBtn">Generate Candidate Emails</button>
+  <button id="addToListBtn">Add to Candidate List</button>
+
   <div id="results"></div>
+  <hr>
+
+  <!-- Company Email Pattern Generator -->
+  <h2>Company Email Pattern Generator</h2>
+  <input id="companyName" type="text" placeholder="Company name (e.g., Hudl)">
+  <input id="firstName" type="text" placeholder="First name">
+  <input id="lastName" type="text" placeholder="Last name">
+  <button id="generateCompanyEmailBtn">Generate Email Patterns</button>
+
+  <div id="companyResults"></div>
+  <hr>
+
+  <!-- Bulk Candidate List -->
+  <h2>Candidate List</h2>
+  <button id="exportCSVBtn">Export CSV</button>
+  <div id="candidateList"></div>
+
   <script src="popup.js"></script>
 </body>
 </html>
