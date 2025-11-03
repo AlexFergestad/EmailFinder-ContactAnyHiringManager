@@ -1,4 +1,4 @@
-# 🎯 Job Contact Finder (Chrome Extension)
+# 🎯 Hiring Manager Email Contact Finder (Chrome Extension)
 
 A full-stack, ethical automation tool that helps you discover **public recruiter or career contact links** from company websites — combining a **Python Selenium backend** and a **Chrome extension frontend**.
 
