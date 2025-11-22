@@ -1,7 +1,7 @@
 let lastProfile = null;
 let candidateList = [];
 
-// LinkedIn Profile Extraction Here
+// LinkedIn Profile Extraction Down Here
 document.getElementById("scrapeBtn").addEventListener("click", () => {
   const resultsDiv = document.getElementById("results");
   resultsDiv.innerHTML = "<p>Fetching profile info...</p>";
