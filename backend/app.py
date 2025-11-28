@@ -5,6 +5,7 @@
 import sys
 import os
 
+# More documentation
 # This line makes sure Python can find and import files from the project’s parent directory.
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
